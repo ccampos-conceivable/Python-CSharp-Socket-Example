@@ -1,6 +1,7 @@
 import socket
 import time
 
+# Local IP address for testing
 HOST = '192.168.100.109'
 PORT = 50001
 
