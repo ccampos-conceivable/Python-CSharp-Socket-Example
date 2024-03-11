@@ -21,6 +21,6 @@ The server enter into a reception cycle where every command received is shown in
 
 ![image](https://github.com/ccampos-conceivable/Python-CSharp-Socket-Example/assets/162512474/2b13e024-3589-4716-8be4-a987bf75591b)
 
-The application also can send open commands to client to test the communication. Every command sent to the client will be replied back to server.
+The application can also send free text commands to client to test the communication. Every command sent to the client will be replied back to server.
 
 ![image](https://github.com/ccampos-conceivable/Python-CSharp-Socket-Example/assets/162512474/a8949b4d-6cb5-4ab6-9e41-827d5a51d147)
