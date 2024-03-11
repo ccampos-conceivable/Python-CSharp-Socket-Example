@@ -1,0 +1,20 @@
+D:\conceivable-development\Python-Unity Link\Server\Server\bin\Debug\Server.exe.config
+D:\conceivable-development\Python-Unity Link\Server\Server\bin\Debug\Server.exe
+D:\conceivable-development\Python-Unity Link\Server\Server\bin\Debug\Server.pdb
+D:\conceivable-development\Python-Unity Link\Server\Server\obj\Debug\Server.csproj.AssemblyReference.cache
+D:\conceivable-development\Python-Unity Link\Server\Server\obj\Debug\Server.Form1.resources
+D:\conceivable-development\Python-Unity Link\Server\Server\obj\Debug\Server.Properties.Resources.resources
+D:\conceivable-development\Python-Unity Link\Server\Server\obj\Debug\Server.csproj.GenerateResource.cache
+D:\conceivable-development\Python-Unity Link\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+D:\conceivable-development\Python-Unity Link\Server\Server\obj\Debug\Server.exe
+D:\conceivable-development\Python-Unity Link\Server\Server\obj\Debug\Server.pdb
+D:\conceivable-development\Python-Unity Socket Communication\Server\Server\bin\Debug\Server.exe.config
+D:\conceivable-development\Python-Unity Socket Communication\Server\Server\bin\Debug\Server.exe
+D:\conceivable-development\Python-Unity Socket Communication\Server\Server\bin\Debug\Server.pdb
+D:\conceivable-development\Python-Unity Socket Communication\Server\Server\obj\Debug\Server.csproj.AssemblyReference.cache
+D:\conceivable-development\Python-Unity Socket Communication\Server\Server\obj\Debug\Server.Form1.resources
+D:\conceivable-development\Python-Unity Socket Communication\Server\Server\obj\Debug\Server.Properties.Resources.resources
+D:\conceivable-development\Python-Unity Socket Communication\Server\Server\obj\Debug\Server.csproj.GenerateResource.cache
+D:\conceivable-development\Python-Unity Socket Communication\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+D:\conceivable-development\Python-Unity Socket Communication\Server\Server\obj\Debug\Server.exe
+D:\conceivable-development\Python-Unity Socket Communication\Server\Server\obj\Debug\Server.pdb
