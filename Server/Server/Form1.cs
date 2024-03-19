@@ -1,111 +1,55 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Net.Sockets;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
-using static System.Windows.Forms.AxHost;
+using pyComm;
 
 namespace Server
 {
     public partial class Form1 : Form
     {
-        private TcpListener _listener;
-        private Thread _listenerThread;
-        TcpClient client;
-        NetworkStream ns;
-
+        pyHandler handler;
 
         public Form1()
         {
             InitializeComponent();
+
+            handler = new pyHandler();
+            handler.OnConnected += Handler_OnConnected;
+            handler.OnStart += Handler_OnStart;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Handler_OnStart(object sender, EventArgs e)
         {
-        }
-
-        private void StartListener()
-        {
-            _listenerThread = new Thread(RunListener);
-            _listenerThread.Start();
-        }
-
-        private void RunListener()
-        {
-            try
-            {
-                _listener = new TcpListener(IPAddress.Any, 50001);
-                _listener.Start();
-
-                TcpClient client = _listener.AcceptTcpClient();
-                this.Invoke(
-                    new Action(
-                        () =>
-                        {
-                            textBox1.Text += string.Format("\nNew connection from {0}", client.Client.RemoteEndPoint) + Environment.NewLine;
-                        }
-                    )); ;
-                ThreadPool.QueueUserWorkItem(ProcessClient, client);
-            }
-            catch (Exception ex)
-            {
-                //Log a connection error
-            }
-        }
-
-        private void ProcessClient(object state)
-        {
-            client = state as TcpClient;
-            ns = client.GetStream();
-            byte[] dataReceived = new byte[1024];
-            string command = "";
-
-            try
-            {
-                while (client.Connected)
-                {
-                    if (ns.DataAvailable)
+            this.Invoke(
+                new Action(
+                    () =>
                     {
-                        int dataLen = ns.Read(dataReceived, 0, client.Available);
-                        command = ASCIIEncoding.ASCII.GetString(dataReceived, 0, dataLen);
-                        this.Invoke(
-                            new Action(
-                                () =>
-                                {
-                                    textBox1.Text += "Command received: " + command + Environment.NewLine;
-                                }
-                            )); ;
-                        // Respond acknowledge to Python
-                        ns.Write(ASCIIEncoding.ASCII.GetBytes("ACK"), 0, ASCIIEncoding.ASCII.GetBytes("ACK").Length);
+                        textBox1.Text += "Command received: START" + Environment.NewLine;
                     }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Log a communication error
-            }
+                )); ;
+        }
+
+        private void Handler_OnConnected(object sender, EventArgs e)
+        {
+            this.Invoke(
+                new Action(
+                    () =>
+                    {
+                        textBox1.Text += "New connection from " + handler.PyAddress + Environment.NewLine;
+                    }
+                )); ;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if(button1.Text == "Start Listener")
             {
-                StartListener();
                 textBox1.Text += "Listener Started." + Environment.NewLine;
                 button1.Text = "Stop Listener";
+                handler.Connect();
             }
             else
             {
-                ns.Close();
-                client.Close();
+                handler.Close();
                 textBox1.Text += "Listener Stopped." + Environment.NewLine;
                 button1.Text = "Start Listener";
             }
@@ -113,7 +57,12 @@ namespace Server
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ns.Write(ASCIIEncoding.ASCII.GetBytes(textBox2.Text), 0, textBox2.Text.Length);
+            handler.Send(textBox2.Text);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            handler.Close();
         }
     }
 }

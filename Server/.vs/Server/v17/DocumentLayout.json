@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\conceivable-development\\Python-CSharp-Socket-Example\\Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{165C993A-DAF5-4455-A3B2-A98375FB5685}|Server\\Server.csproj|d:\\conceivable-development\\python-csharp-socket-example\\server\\server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{165C993A-DAF5-4455-A3B2-A98375FB5685}|Server\\Server.csproj|solutionrelative:server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FDBA0004-14B0-438E-8D2F-8AB61DDA9516}|pyComm\\pyComm.csproj|d:\\conceivable-development\\python-csharp-socket-example\\server\\pycomm\\pyhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDBA0004-14B0-438E-8D2F-8AB61DDA9516}|pyComm\\pyComm.csproj|solutionrelative:pycomm\\pyhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{165C993A-DAF5-4455-A3B2-A98375FB5685}|Server\\Server.csproj|D:\\conceivable-development\\Python-CSharp-Socket-Example\\Server\\server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{165C993A-DAF5-4455-A3B2-A98375FB5685}|Server\\Server.csproj|solutionrelative:server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{165C993A-DAF5-4455-A3B2-A98375FB5685}|Server\\Server.csproj|D:\\conceivable-development\\Python-CSharp-Socket-Example\\Server\\server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{165C993A-DAF5-4455-A3B2-A98375FB5685}|Server\\Server.csproj|solutionrelative:server\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,26 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\conceivable-development\\Python-CSharp-Socket-Example\\Server\\Server\\Form1.cs",
-              "RelativeDocumentMoniker": "Server\\Form1.cs",
-              "ToolTip": "D:\\conceivable-development\\Python-CSharp-Socket-Example\\Server\\Server\\Form1.cs",
-              "RelativeToolTip": "Server\\Form1.cs",
-              "ViewState": "AQIAAF0AAAAAAAAAAAAowEEAAAAPAAAA",
+              "Title": "pyHandler.cs",
+              "DocumentMoniker": "D:\\conceivable-development\\Python-CSharp-Socket-Example\\Server\\pyComm\\pyHandler.cs",
+              "RelativeDocumentMoniker": "pyComm\\pyHandler.cs",
+              "ToolTip": "D:\\conceivable-development\\Python-CSharp-Socket-Example\\Server\\pyComm\\pyHandler.cs",
+              "RelativeToolTip": "pyComm\\pyHandler.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-11T22:07:38.891Z",
+              "WhenOpened": "2024-03-15T17:38:15.098Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Form1.cs [Dise\u00F1o]",
+              "Title": "Form1.cs",
               "DocumentMoniker": "D:\\conceivable-development\\Python-CSharp-Socket-Example\\Server\\Server\\Form1.cs",
               "RelativeDocumentMoniker": "Server\\Form1.cs",
-              "ToolTip": "D:\\conceivable-development\\Python-Unity Socket Communication\\Server\\Server\\Form1.cs [Dise\u00F1o]",
-              "RelativeToolTip": "..\\..\\Python-Unity Socket Communication\\Server\\Server\\Form1.cs [Dise\u00F1o]",
+              "ToolTip": "D:\\conceivable-development\\Python-CSharp-Socket-Example\\Server\\Server\\Form1.cs",
+              "RelativeToolTip": "Server\\Form1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-11T19:19:32.62Z"
+              "WhenOpened": "2024-03-11T22:07:38.891Z"
             }
           ]
         }

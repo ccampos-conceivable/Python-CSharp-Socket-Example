@@ -2,8 +2,10 @@ import socket
 import time
 
 # Local IP address for testing
-HOST = '192.168.100.109'
+HOST = '192.168.100.53'
 PORT = 50001
+
+print(socket.gethostbyname(socket.gethostname()))
 
 # Client. Connect, sends a message, and read and ACK for acknowledge from server.
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

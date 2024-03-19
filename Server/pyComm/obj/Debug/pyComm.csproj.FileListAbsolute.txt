@@ -1,0 +1,6 @@
+D:\conceivable-development\Python-CSharp-Socket-Example\Server\pyComm\bin\Debug\pyComm.dll
+D:\conceivable-development\Python-CSharp-Socket-Example\Server\pyComm\bin\Debug\pyComm.pdb
+D:\conceivable-development\Python-CSharp-Socket-Example\Server\pyComm\obj\Debug\pyComm.csproj.AssemblyReference.cache
+D:\conceivable-development\Python-CSharp-Socket-Example\Server\pyComm\obj\Debug\pyComm.csproj.CoreCompileInputs.cache
+D:\conceivable-development\Python-CSharp-Socket-Example\Server\pyComm\obj\Debug\pyComm.dll
+D:\conceivable-development\Python-CSharp-Socket-Example\Server\pyComm\obj\Debug\pyComm.pdb
