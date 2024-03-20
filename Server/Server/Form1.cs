@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Net.Sockets;
+using System.Net;
+using System.Text;
 using System.Windows.Forms;
 using pyComm;
 
@@ -13,7 +16,6 @@ namespace Server
             InitializeComponent();
 
             handler = new pyHandler();
-            handler.OnConnected += Handler_OnConnected;
             handler.OnStart += Handler_OnStart;
         }
 
@@ -28,24 +30,13 @@ namespace Server
                 )); ;
         }
 
-        private void Handler_OnConnected(object sender, EventArgs e)
-        {
-            this.Invoke(
-                new Action(
-                    () =>
-                    {
-                        textBox1.Text += "New connection from " + handler.PyAddress + Environment.NewLine;
-                    }
-                )); ;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if(button1.Text == "Start Listener")
             {
                 textBox1.Text += "Listener Started." + Environment.NewLine;
                 button1.Text = "Stop Listener";
-                handler.Connect();
+                handler.Open();
             }
             else
             {

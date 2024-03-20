@@ -1,83 +1,83 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Net.NetworkInformation;
 
 namespace Client
 {
     public partial class Form1 : Form
     {
-        NetworkInterface[] localInterfaces;
-        List<IPAddress> localAdaptersAddresse;
-        IPEndPoint localEndPoint;
-        int localPort = 0;
-
-        IPAddress unitAddress;
-        IPEndPoint unitEndPoint;
-
-        Socket connection;
+        ClientSender clientSender;
 
         public Form1()
         {
             InitializeComponent();
+
+            clientSender = new ClientSender(60000);
+            clientSender.OnClientReceived += ClientSender_OnClientReceived;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void ClientSender_OnClientReceived(object sender, EventArgs e)
         {
-            // Search for local adapters to use for the connection.
-            localInterfaces = NetworkInterface.GetAllNetworkInterfaces();
-            localAdaptersAddresse = new List<IPAddress>();
-            foreach (var adapter in localInterfaces)
-            {
-                var ipProps = adapter.GetIPProperties();
-
-                foreach (var ip in ipProps.UnicastAddresses)
-                {
-                    if ((ip.Address.AddressFamily == AddressFamily.InterNetwork))
-                    {
-                        localAdaptersAddresse.Add(ip.Address);
-                        comboBox1.Items.Add(adapter.Name.ToString() + " / " + ip.Address.ToString());
-                        Console.Out.WriteLine(adapter.Name.ToString() + " / " + ip.Address.ToString());
-                    }
-                }
-            }
+            MessageBox.Show("Data Received");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (button1.Text == "Connect")
-            {
-                //Local
-                localEndPoint = new IPEndPoint(localAdaptersAddresse[comboBox1.SelectedIndex], localPort);
+            clientSender.Send("START");
+        }
 
-                //Unit
-                string[] sAddress = textBox1.Text.Split('.');
-                byte[] bAddress = new byte[] { byte.Parse(sAddress[0]),
-                                           byte.Parse(sAddress[1]),
-                                           byte.Parse(sAddress[2]),
-                                           byte.Parse(sAddress[3])};
-                unitAddress = new IPAddress(bAddress);
-                unitEndPoint = new IPEndPoint(unitAddress, int.Parse(textBox2.Text));
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            clientSender.Close();
+        }
+    }
 
-                connection = new Socket(unitEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                connection.Bind(localEndPoint);
-                connection.Connect(unitEndPoint);
-                button1.Text = "Disconnect";
-            }
-            else
+    public class ClientSender
+    {
+        private UdpClient udpClient = new UdpClient();
+        private int PORT;
+
+        public event EventHandler<EventArgs> OnClientReceived;
+
+        public ClientSender(int port)
+        {
+            PORT = port;
+        }
+
+        public void Send(string text)
+        {
+            try
             {
-                connection.Disconnect(true);
-                button1.Text = "Connect";
+                IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, PORT);
+                byte[] bytes = Encoding.ASCII.GetBytes(text);
+                udpClient.Send(bytes, bytes.Length, ip);
+                udpClient.BeginReceive(Receive, new object());
             }
+            catch
+            {
+            }
+        }
+
+        private void Receive(IAsyncResult ar)
+        {
+            try
+            {
+                IPEndPoint ip = new IPEndPoint(IPAddress.Any, PORT);
+                byte[] bytes = udpClient.EndReceive(ar, ref ip);
+                string command = Encoding.ASCII.GetString(bytes);
+                if(OnClientReceived != null)
+                    OnClientReceived(this, new EventArgs());
+            }
+            catch
+            {
+            }
+        }
+
+        public void Close()
+        {
+            udpClient.Close();
         }
     }
 }

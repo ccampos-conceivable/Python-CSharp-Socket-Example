@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
-using System.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace pyComm
@@ -11,95 +11,51 @@ namespace pyComm
     {
         #region CLASS_VARIABLES
 
-        private TcpListener _listener;
-        private Thread _listenerThread;
-        private TcpClient client;
-        private NetworkStream ns;
-
-        private bool connected = false;
-
-        #endregion
-
-        #region PUBLIC_PROPERTIES
-
-        public bool Connected
-        {
-            get { return connected; }
-        }
-
-        public string PyAddress { get; private set; }
+        private UdpClient udp;
+        private IPEndPoint ipClient;
+        private int PORT = 60000;
 
         #endregion
 
         #region PUBLIC_EVENTS
 
-        public event EventHandler<EventArgs> OnConnected;
-        public event EventHandler<EventArgs> OnDisconnected;
         public event EventHandler<EventArgs> OnStart;
 
         #endregion
 
         #region PRIVATE_METHODS
 
-        private void StartListener()
+        private void ContinueListener()
         {
-            _listenerThread = new Thread(RunListener);
-            _listenerThread.Start();
+            if(this.udp.Client == null)
+            {
+                this.udp = new UdpClient(PORT);
+            }
+            this.udp.BeginReceive(Receive, new object());
         }
 
-        private void RunListener()
+        private void Receive(IAsyncResult ar)
         {
             try
             {
-                _listener = new TcpListener(IPAddress.Any, 60000);
-                _listener.Start();
-
-                TcpClient client = _listener.AcceptTcpClient();
-                if (client.Connected)
+                IPEndPoint ip = new IPEndPoint(IPAddress.Any, PORT);
+                byte[] bytes = udp.EndReceive(ar, ref ip);
+                ipClient = ip;
+                string command = Encoding.ASCII.GetString(bytes);
+                switch (command)
                 {
-                    connected = true;
-                    PyAddress = client.Client.RemoteEndPoint.ToString();
-                    if(OnConnected != null)
-                        OnConnected(this, EventArgs.Empty);
-                    ThreadPool.QueueUserWorkItem(ProcessClient, client);
-                }
-            }
-            catch
-            {
-                connected = false;
-            }
-        }
-
-        private void ProcessClient(object state)
-        {
-            client = state as TcpClient;
-            ns = client.GetStream();
-            byte[] dataReceived = new byte[1024];
-            string command = "";
-
-            try
-            {
-                while (client.Connected)
-                {
-                    if (ns.DataAvailable)
-                    {
-                        int dataLen = ns.Read(dataReceived, 0, client.Available);
-                        command = ASCIIEncoding.ASCII.GetString(dataReceived, 0, dataLen);
-                        switch (command)
+                    case "START":
                         {
-                            case "START":
-                                {
-                                    if (OnStart != null)
-                                        OnStart.Invoke(this, EventArgs.Empty);
-                                    break;
-                                }
+                            if (OnStart != null)
+                                OnStart.Invoke(this, EventArgs.Empty);
+                            break;
                         }
-                    }
                 }
+
+                ContinueListener();
             }
             catch
             {
-                connected = false;
             }
         }
 
@@ -107,29 +63,27 @@ namespace pyComm
 
         #region PUBLIC_METHODS
 
-        public void Connect()
+        public void Open()
         {
-            StartListener();
+            this.udp = new UdpClient(PORT);
+            ContinueListener();
         }
 
         public void Send(string text)
         {
-            // Respond to Python
-            if(connected)
+            try
             {
-                ns.Write(ASCIIEncoding.ASCII.GetBytes(text), 0, ASCIIEncoding.ASCII.GetBytes(text).Length);
+                byte[] bytes = Encoding.ASCII.GetBytes(text);
+                udp.Send(bytes, bytes.Length, ipClient);
+            }
+            catch
+            { 
             }
         }
 
         public void Close()
         {
-            connected = false;
-            if (ns != null)
-                ns.Close();
-            if (client != null)
-                client.Close();
-            if (_listener != null)
-                _listener.Server.Close();
+            udp.Close();
         }
 
         #endregion

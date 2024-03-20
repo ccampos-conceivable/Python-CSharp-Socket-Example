@@ -8,3 +8,13 @@ D:\conceivable-development\Python-Unity Link\Client\Client\obj\Debug\Client.cspr
 D:\conceivable-development\Python-Unity Link\Client\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
 D:\conceivable-development\Python-Unity Link\Client\Client\obj\Debug\Client.exe
 D:\conceivable-development\Python-Unity Link\Client\Client\obj\Debug\Client.pdb
+D:\conceivable-development\Python-CSharp-Socket-Example\Client\Client\bin\Debug\Client.exe.config
+D:\conceivable-development\Python-CSharp-Socket-Example\Client\Client\bin\Debug\Client.exe
+D:\conceivable-development\Python-CSharp-Socket-Example\Client\Client\bin\Debug\Client.pdb
+D:\conceivable-development\Python-CSharp-Socket-Example\Client\Client\obj\Debug\Client.csproj.AssemblyReference.cache
+D:\conceivable-development\Python-CSharp-Socket-Example\Client\Client\obj\Debug\Client.Form1.resources
+D:\conceivable-development\Python-CSharp-Socket-Example\Client\Client\obj\Debug\Client.Properties.Resources.resources
+D:\conceivable-development\Python-CSharp-Socket-Example\Client\Client\obj\Debug\Client.csproj.GenerateResource.cache
+D:\conceivable-development\Python-CSharp-Socket-Example\Client\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+D:\conceivable-development\Python-CSharp-Socket-Example\Client\Client\obj\Debug\Client.exe
+D:\conceivable-development\Python-CSharp-Socket-Example\Client\Client\obj\Debug\Client.pdb
