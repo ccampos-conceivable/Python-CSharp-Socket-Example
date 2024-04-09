@@ -8,7 +8,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP) as s:
     try:
         s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         message = b"START"
-        s.sendto(message, ('<broadcast>', 60000))
+        s.sendto(message, ('<broadcast>', PORT))
 
         #Wait up to 10 sec for acknowledge.        
         ready = select.select([s], [], [], 10)
